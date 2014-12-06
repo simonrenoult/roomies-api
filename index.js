@@ -32,10 +32,16 @@ var getConf = function(req, res, next){
   return next();
 };
 
+var playground = function(req, res, next){
+  opbeat.captureError(new Error('Ups, something broke'));
+  return next();
+};
+
 // ---------------- ROUTES ---------------- //
 
 server.get('/', sayHello);
 server.get('/conf', getConf);
+server.get('/playground', getConf);
 
 // ---------------- SERVER START ---------------- //
 
