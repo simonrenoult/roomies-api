@@ -1,10 +1,12 @@
-var restify   = require('restify');
+var restify = require('restify'),
+    fs      = require('fs'),
+    conf    = fs.readFileSync('./app.json');
 
 // ---------------- SERVER CONF ---------------- //
 
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || conf.port;
 var server = restify.createServer({
-  name: 'Roomies',
+  name: conf.name,
   version: '1.0.0'
 });
 
@@ -16,9 +18,14 @@ var sayHello = function(req, res, next){
 	res.send(200, 'Hello world!');
 };
 
+var getConf = function(req, res, next){
+  res.json(conf);
+};
+
 // ---------------- ROUTES ---------------- //
 
 server.get('/', sayHello);
+server.get('/conf', getConf);
 
 // ---------------- SERVER START ---------------- //
 
