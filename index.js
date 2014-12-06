@@ -12,6 +12,14 @@ var server = restify.createServer({
 
 server.use(restify.bodyParser());
 
+// ---------------- MONITORING ------------ //
+
+var opbeat = require('opbeat')({
+    organizationId: process.env.OPBEAT_ORGANIZATION_ID,
+    appId: process.env.OPBEAT_APP_ID,
+    secretToken: process.env.OPBEAT_SECRET_TOKEN
+});
+
 // ---------------- HANLDERS ---------------- //
 
 var sayHello = function(req, res, next){

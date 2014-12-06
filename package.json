@@ -4,7 +4,7 @@
   "description": "Roomies application API",
   "main": "index.js",
   "scripts": {
-  	"start": "node index.js"
+    "start": "node index.js"
   },
   "engines": {
     "node": "0.10.x"
@@ -20,10 +20,10 @@
   },
   "homepage": "https://github.com/dontfeedthe/roomies-api",
   "dependencies": {
+    "opbeat": "^1.0.6",
     "restify": "^2.8.3"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "keywords": [
     "node",
     "restify",
