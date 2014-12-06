@@ -32,7 +32,7 @@ var getConf = function(req, res, next){
   return next();
 };
 
-var playground = function(req, res, next){
+var playground = function playground(req, res, next){
   opbeat.captureError(new Error('Ups, something broke'));
   return next();
 };
@@ -41,7 +41,7 @@ var playground = function(req, res, next){
 
 server.get('/', sayHello);
 server.get('/conf', getConf);
-server.get('/playground', getConf);
+server.get('/playground', playground);
 
 // ---------------- SERVER START ---------------- //
 
