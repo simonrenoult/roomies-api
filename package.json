@@ -1,0 +1,33 @@
+{
+  "name": "roomies-api",
+  "version": "0.0.1",
+  "description": "Roomies application API",
+  "main": "index.js",
+  "scripts": {
+  	"start": "node index.js"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:simonrenoult/roomies-api.git"
+  },
+  "author": "Simon RENOULT <simon.renoult@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dontfeedthe/roomies-api/issues"
+  },
+  "homepage": "https://github.com/dontfeedthe/roomies-api",
+  "dependencies": {
+    "restify": "^2.8.3"
+  },
+  "devDependencies": {
+  },
+  "keywords": [
+    "node",
+    "restify",
+    "sequelize",
+    "roomies"
+  ]
+}
