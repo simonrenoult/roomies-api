@@ -1,6 +1,6 @@
 var restify = require('restify'),
     fs      = require('fs'),
-    conf    = fs.readFileSync('./app.json');
+    conf    = require('./app.json');
 
 // ---------------- SERVER CONF ---------------- //
 
@@ -15,11 +15,13 @@ server.use(restify.bodyParser());
 // ---------------- HANLDERS ---------------- //
 
 var sayHello = function(req, res, next){
-	res.send(200, 'Hello world!');
+  res.send(200, 'Hello world!');
+  return next();
 };
 
 var getConf = function(req, res, next){
-  res.json(conf);
+  res.send(conf);
+  return next();
 };
 
 // ---------------- ROUTES ---------------- //
