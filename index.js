@@ -32,8 +32,9 @@ var getConf = function(req, res, next){
   return next();
 };
 
-var playground = function playground(req, res, next){
+var playground = function(req, res, next){
   opbeat.captureError(new Error('Ups, something broke'));
+  res.send(404, 'Broken!');
   return next();
 };
 
