@@ -1,6 +1,6 @@
 if(!global.hasOwnProperty('db')) {
   var Sequelize = require('sequelize'),
-      conf      = require('../app.json');
+      conf      = require('../app.json'),
       sequelize = null;
 
   if (process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
