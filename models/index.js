@@ -22,9 +22,10 @@ if(!global.hasOwnProperty('db')) {
   }
 
   global.db = {
-    Sequelize : Sequelize,
-    sequelize : sequelize,
-    Roomy     : sequelize.import(__dirname + '/roomy')
+    Sequelize   : Sequelize,
+    sequelize   : sequelize,
+    Roomy       : sequelize.import(__dirname + '/roomy'),
+    Collocation : sequelize.import(__dirname + '/collocation')
   };
 
   /*
