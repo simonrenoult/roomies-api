@@ -21,7 +21,9 @@
   "homepage": "https://github.com/dontfeedthe/roomies-api",
   "dependencies": {
     "opbeat": "^1.0.6",
-    "restify": "^2.8.3"
+    "pg": "^4.1.0",
+    "restify": "^2.8.3",
+    "sequelize": "^2.0.0-rc3"
   },
   "devDependencies": {},
   "keywords": [

@@ -4,5 +4,10 @@
   "description": "Manage your roommate life like a boss - API",
   "repository": "https://github.com/dontfeedthe/roomies.git",
   "logo": "",
-  "keywords": ["node","restify","sequelize","roomies"]
+  "keywords": ["node","restify","sequelize","roomies"],
+  "db": {
+    "name": "roomies",
+    "username":"roomies",
+    "password":"roomies-azerty"
+  }
 }

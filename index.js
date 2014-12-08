@@ -1,16 +1,16 @@
-var restify = require('restify'),
-    fs      = require('fs'),
-    conf    = require('./app.json');
+var Restify = require('restify'),
+    conf    = require('./app.json'),
+    db      = require('./models');
 
 // ---------------- SERVER CONF ---------------- //
 
 var port = process.env.PORT || conf.port;
-var server = restify.createServer({
+var server = Restify.createServer({
   name: conf.name,
   version: '1.0.0'
 });
 
-server.use(restify.bodyParser());
+server.use(Restify.bodyParser());
 
 // ---------------- MONITORING ------------ //
 
