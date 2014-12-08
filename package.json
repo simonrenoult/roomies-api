@@ -4,7 +4,8 @@
   "description": "Roomies application API",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jasmine-node spec"
   },
   "engines": {
     "node": "0.10.x"
