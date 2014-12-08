@@ -24,6 +24,7 @@ if(!global.hasOwnProperty('db')) {
   global.db = {
     Sequelize : Sequelize,
     sequelize : sequelize,
+    Roomy     : sequelize.import(__dirname + '/roomy')
   };
 
   /*
