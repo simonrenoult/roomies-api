@@ -25,7 +25,8 @@ if(!global.hasOwnProperty('db')) {
     Sequelize   : Sequelize,
     sequelize   : sequelize,
     Roomy       : sequelize.import(__dirname + '/roomy'),
-    Collocation : sequelize.import(__dirname + '/collocation')
+    Collocation : sequelize.import(__dirname + '/collocation'),
+    Message : sequelize.import(__dirname + '/message')
   };
 
   /*
