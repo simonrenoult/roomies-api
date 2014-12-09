@@ -1,6 +1,6 @@
 # Roomies API
-[![Build Status](https://travis-ci.org/simonrenoult/roomies-api.svg?branch=master)](https://travis-ci.org/simonrenoult/roomies-api)
-[![Code Climate](https://codeclimate.com/github/simonrenoult/roomies-api/badges/gpa.svg)](https://codeclimate.com/github/simonrenoult/roomies-api)
+[![Build Status](https://travis-ci.org/dontfeedthe/roomies-api.svg)](https://travis-ci.org/dontfeedthe/roomies-api)
+[![Code Climate](https://codeclimate.com/github/dontfeedthe/roomies-api/badges/gpa.svg)](https://codeclimate.com/github/dontfeedthe/roomies-api)
 
 Roomies API using [restify](http://mcavage.me/node-restify/) and [sequelize](http://sequelizejs.com/).
 
