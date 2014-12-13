@@ -4,8 +4,8 @@
   "description": "Roomies application API",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "jasmine-node spec"
+    "start": "node ./bin/www",
+    "test": "mocha --timeout 10000 spec"
   },
   "engines": {
     "node": "0.10.x"
@@ -21,13 +21,16 @@
   },
   "homepage": "https://github.com/dontfeedthe/roomies-api",
   "dependencies": {
+    "chai": "^1.10.0",
     "opbeat": "^1.0.6",
     "pg": "^4.1.0",
     "restify": "^2.8.3",
     "sequelize": "^2.0.0-rc3"
   },
   "devDependencies": {
-    "jasmine-node": "^1.14.5"
+    "hippie": "^0.3.0",
+    "jasmine-node": "^1.14.5",
+    "supertest": "^0.15.0"
   },
   "keywords": [
     "node",
