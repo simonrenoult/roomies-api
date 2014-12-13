@@ -5,6 +5,9 @@
   "repository": "https://github.com/dontfeedthe/roomies.git",
   "logo": "",
   "keywords": ["node","restify","sequelize","roomies"],
+  "documentation": {
+    "url": "http://docs.roomies.apiary.io/"
+  },
   "db": {
     "name": "roomies",
     "username":"roomies",

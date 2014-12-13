@@ -23,7 +23,12 @@ var opbeat = require('opbeat')({
 
 // ---------------- HANLDERS ---------------- //
 
+var miscHanlder = require('./handlers/misc');
+
 // ---------------- ROUTES ---------------- //
+
+app.get('/api/docs', miscHanlder.getDocumentation);
+app.get('/api/conf', miscHanlder.getConf);
 
 // ---------------- MISC ---------------- //
 
