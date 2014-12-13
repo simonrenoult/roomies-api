@@ -1,6 +1,7 @@
 var restify = require('restify'),
+    args    = require('./utils/arguments'),
     conf    = require('./app.json'),
-    db      = require('./models');
+    db      = require('./models')(args);
 
 // ---------------- SERVER CONF ---------------- //
 

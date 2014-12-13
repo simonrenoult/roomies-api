@@ -1,8 +1,8 @@
-if(!global.hasOwnProperty('db')) {
-  var Sequelize = require('sequelize'),
-      conf      = require('../app.json'),
-      sequelize = null;
+var Sequelize = require('sequelize'),
+    conf      = require('../app.json'),
+    sequelize = null;
 
+module.exports = function(args){
   if (process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
 
     // the application is executed on Heroku ... use the postgres database
@@ -17,22 +17,24 @@ if(!global.hasOwnProperty('db')) {
       logging:  true //false
     });
   } else {
-    // the application is executed on the local machine ... use mysql
-    sequelize = new Sequelize(conf.db.name, conf.db.username, conf.db.username);
+    var env = (args.development) ? 'development' : 'test';
+
+    sequelize = new Sequelize(
+      conf.db[env].name,
+      conf.db[env].username,
+      conf.db[env].username);
   }
 
-  global.db = {
-    Sequelize   : Sequelize,
-    sequelize   : sequelize,
+  var db = {
     Roomy       : sequelize.import(__dirname + '/roomy'),
     Collocation : sequelize.import(__dirname + '/collocation'),
-    Message : sequelize.import(__dirname + '/message')
+    Message     : sequelize.import(__dirname + '/message')
   };
 
   /*
     Associations can be defined here. E.g. like this:
     global.db.User.hasMany(global.db.SomethingElse)
   */
-}
 
-module.exports = global.db;
+  return db;
+};
