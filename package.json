@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha --timeout 10000 spec"
+    "test": "ENVIRONMENT=test mocha spec"
   },
   "engines": {
     "node": "0.10.x"
@@ -29,8 +29,7 @@
     "sequelize": "^2.0.0-rc3"
   },
   "devDependencies": {
-    "hippie": "^0.3.0",
-    "jasmine-node": "^1.14.5",
+    "mocha": "^2.0.1",
     "supertest": "^0.15.0"
   },
   "keywords": [

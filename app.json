@@ -9,6 +9,7 @@
     "url": "http://docs.roomies.apiary.io/"
   },
   "db": {
+    "default": "development",
     "development": {
       "name": "roomies",
       "username":"roomies",
@@ -16,7 +17,7 @@
     },
     "test": {
       "name": "roomies-test",
-      "username":"roomies-test",
+      "username":"roomies",
       "password":"roomies-azerty"
     }
   }
