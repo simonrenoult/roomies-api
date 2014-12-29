@@ -8,8 +8,13 @@ module.exports = function (sequelize) {
       unique: true,
       defaultValue: Sequelize.UUIDV4
     },
-    firstName: Sequelize.STRING,
-    lastName: Sequelize.STRING,
+    pseudo: {
+      type: Sequelize.STRING,
+      unique: true,
+      validate: {
+        is: /^[a-zA-Z0-9_.]+$/i
+      }
+    },
     email: {
       type: Sequelize.STRING,
       unique: true,

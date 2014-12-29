@@ -91,10 +91,27 @@ exports.deleteOne = function(req, res, next){
 exports.createOne = function(req, res, next) {
   var email    = req.body.email;
   var password = req.body.password;
+  var pseudo   = req.body.pseudo;
+
+  if(!email) {
+    res.send(400, {error: true, message: 'Email is missing'});
+    return next();
+  }
+
+  if(!pseudo) {
+    res.send(400, {error: true, message: 'Pseudo is missing'});
+    return next();
+  }
+
+  if(!password) {
+    res.send(400, {error: true, message: 'Password is missing'});
+    return next();
+  }
 
   var roomy = req.models.Roomy.build({
     email: email,
-    password: password
+    password: password,
+    pseudo: pseudo
   });
 
   roomy
@@ -102,15 +119,16 @@ exports.createOne = function(req, res, next) {
     .complete(function(err, roomy) {
       if(!!err){
         if(err.name === 'SequelizeUniqueConstraintError') {
-          return res.send(409, {
+          res.send(409, {
             error: true, 
-            message: 'This email is already taken'
+            message: 'This ' + err.index + ' is already taken'
           });
         }
-
+        // Unhandled error still fails.
         return next(err);
       }
 
+      // Successful save.
       res.send(200, {error: false, message: roomy});
       return next(roomy);
     });
@@ -125,7 +143,7 @@ exports.updateOne = function(req, res, next){
       }
 
       if(!roomy) {
-        res.send(404);
+        res.send(404, {error: true, message: 'Could not find the user'});
         return next();
       }
 
