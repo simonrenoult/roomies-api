@@ -21,8 +21,11 @@
   },
   "homepage": "https://github.com/dontfeedthe/roomies-api",
   "dependencies": {
+    "bcrypt": "^0.8.0",
     "chai": "^1.10.0",
     "commander": "^2.5.0",
+    "mysql": "^2.5.4",
+    "node-uuid": "^1.4.2",
     "opbeat": "^1.0.6",
     "pg": "^4.1.0",
     "restify": "^2.8.3",

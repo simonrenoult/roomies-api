@@ -12,13 +12,13 @@
     "default": "development",
     "development": {
       "name": "roomies",
-      "username":"roomies",
-      "password":"roomies-azerty"
+      "username":"root",
+      "password":""
     },
     "test": {
       "name": "roomies-test",
-      "username":"roomies",
-      "password":"roomies-azerty"
+      "username":"root",
+      "password":""
     }
   }
 }

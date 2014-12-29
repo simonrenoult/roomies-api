@@ -1,4 +1,6 @@
-var should = require('chai').should();
+var 
+  restify = require('restify'),
+  client  =  restify.createJsonClient({url: 'http://localhost:1337'});
 
 describe('#roomy', function() {
 
@@ -39,35 +41,3 @@ describe('#roomy', function() {
   });
 });
 
-require('./api_context')(function(api){
-  describe('/roomies', function () {
-
-    describe('GET', function () {
-      it('Should return an empty list', function(done) {
-        api.get('/api/roomies').expect(200,done);
-      });
-    });
-
-    describe('POST', function() {
-      it('Should create a new record', function(done) {
-        api.post('/api/roomies').send({last_name: 'foobar'}).expect(201, done);
-        api.delete('/api/roomies');
-      });
-    });
-
-    describe('DELETE', function () {
-      it('Should delete all the records', function(done) {
-        api.delete('/api/roomies').expect(200, done);
-      });
-    });
-  });
-
-  describe('/roomies/:id', function () {
-    describe('POST', function() {
-      it('Should create a new record', function(done) {
-        api.post('/api/roomies').send({last_name: 'foobar'}).expect(201, done);
-        api.delete('/api/roomies');
-      });
-    });
-  });
-});

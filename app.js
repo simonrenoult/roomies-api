@@ -1,11 +1,12 @@
-var restify = require('restify'),
-    conf    = require('./app.js'),
-    models  = require('./models');
+var
+  restify = require('restify'),
+  conf    = require('./app'),
+  models  = require('./models');
 
 // ---------------- SERVER CONF ---------------- //
 
 var app = restify.createServer({
-  logging: false,
+  logging: true,
   name: conf.name,
   version: '1.0.0'
 });
@@ -33,21 +34,23 @@ var opbeat = require('opbeat')({
 
 // ---------------- HANLDERS ---------------- //
 
-var miscHanlder = require('./handlers/misc');
+var miscHandler = require('./handlers/misc');
 var roomyHandler = require('./handlers/roomy');
 
 // ---------------- ROUTES ---------------- //
 
-app.get('/api/docs', miscHanlder.getDocumentation);
-app.get('/api/conf', miscHanlder.getConf);
+app.get('/api/docs', miscHandler.getDocumentation);
+app.get('/api/conf', miscHandler.getConf);
 
 app.get ('/api/roomies', roomyHandler.findAll);
 app.post('/api/roomies', roomyHandler.createOne);
 app.del ('/api/roomies', roomyHandler.deleteAll);
+app.put ('/api/roomies', miscHandler.methodNotAllowed);
 
-app.get ('/api/roomies/:id', roomyHandler.findOne);
-app.put ('/api/roomies/:id', roomyHandler.updateOne);
-app.del ('/api/roomies/:id', roomyHandler.deleteOne);
+app.get ('/api/roomies/:uuid', roomyHandler.findOne);
+app.put ('/api/roomies/:uuid', roomyHandler.updateOne);
+app.del ('/api/roomies/:uuid', roomyHandler.deleteOne);
+app.post('/api/roomies/:uuid', miscHandler.methodNotAllowed);
 
 // ---------------- MISC ---------------- //
 

@@ -20,7 +20,7 @@ if (process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
     conf.db[env].name,
     conf.db[env].username,
     conf.db[env].password, {
-      logging: false
+      logging: true
     });
 }
 
@@ -29,6 +29,8 @@ var db = {
   Collocation : sequelize.import(__dirname + '/collocation'),
   Message     : sequelize.import(__dirname + '/message')
 };
+
+sequelize.sync({force: true});
 
 /*
   Associations can be defined here. E.g. like this:

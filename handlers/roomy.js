@@ -1,83 +1,137 @@
 var Sequelize = require('sequelize');
-var util = require('util');
+var restify = require('restify');
 
 exports.findAll = function(req, res, next){
-  req.models.Roomy.findAll().then(function(roomies){
-    res.send(200, {error: false, message: roomies});
-    return next(roomies);
-  });
+  req.models.Roomy
+    .findAll()
+    .complete(function(err, roomies){
+      if(!!err) {
+        return next(err);
+      }
+
+      res.send(200, {error: false, message: roomies});
+      return next(roomies);
+    });
 };
 
 exports.findOne = function(req, res, next){
-  req.models.Roomy.find(req.params.id).then(function(roomy){
-    if(!roomy) {
-      res.send(404);
-      return next();
-    }
+  req.models.Roomy
+    .find(req.params.uuid)
+    .complete(function(err, roomy){
+      if(!!err) {
+        return next(err);
+      }
 
-    res.send(200, {error: false, message: roomy});
-    return next(roomy);
-  });
+      if(!roomy) {
+        res.send(404, {
+          error: false, 
+          message:'Resource #' + req.params.uuid + ' does not exist.'
+        });
+        return next(roomy);
+      }
+
+      res.send(200, {error: false, message: roomy});
+      return next(roomy);
+    });
 };
 
 exports.deleteAll = function(req, res, next){
-  req.models.Roomy.findAll().then(function(roomies){
-    if(!roomies.length) {
-      res.send(404);
-      return next();
-    }
+  req.models.Roomy
+    .findAll()
+    .complete(function(err, roomies){
+      if(!!err) {
+        return next(err);
+      }
 
-    var chainer = new Sequelize.Utils.QueryChainer();
-    roomies.forEach(function(roomy) {
-        chainer.add(roomy.destroy());
-    });
-
-    chainer.run();
-    res.send(200, {error: false, message: 'Roomies removed'});
-    return next();
-  });
-};
-
-exports.deleteOne = function(req, res, next){
-  req.models.Roomy.find(req.params.id).then(function(roomy){
-    if(!roomy) {
-      res.send(404);
-      return next();
-    }
-
-    roomy.destroy().then(function(err){
-      if(err) {
-        res.send(500);
+      if(!roomies.length) {
+        res.send(404);
         return next();
       }
 
-      res.send(200, {error: false, message: 'Roomy #' + roomy.id + ' deleted.'});
-      return next(roomy);
+      var chainer = new Sequelize.Utils.QueryChainer();
+      roomies.forEach(function(roomy) {
+          chainer.add(roomy.destroy());
+      });
+
+      chainer.run();
+      res.send(200, {error: false, message: 'Roomies removed'});
+      return next();
     });
+};
+
+exports.deleteOne = function(req, res, next){
+  req.models.Roomy
+    .find(req.params.uuid)
+    .complete(function(err, roomy){
+      if(!!err) {
+        return next(err);
+      }
+
+      if(!roomy) {
+        res.send(404);
+        return next();
+      }
+
+      roomy.destroy().complete(function(err){
+        if(err) {
+          res.send(500);
+          return next();
+        }
+
+        res.send(200, {
+          error: false, 
+          message: 'Roomy #' + roomy.id + ' deleted.'
+        });
+
+        return next(roomy);
+      });
   });
 };
 
 exports.createOne = function(req, res, next) {
-  req.models.Roomy.create(req.body).then(function(roomy){
-    if(!roomy){
-      res.send(500);
-      return next(roomy);
-    }
+  var email    = req.body.email;
+  var password = req.body.password;
 
-    res.send(201, {error: false, message: roomy});
-    return next(roomy);
+  var roomy = req.models.Roomy.build({
+    email: email,
+    password: password
   });
-};
 
-exports.updateOne = function(req, res, next){
-  req.models.Roomy.find(req.params.id).then(function(roomy){
-    if(!roomy) {
-      res.send(404);
-      return next();
-    }
-    roomy.updateAttributes(req.params).then(function(roomy){
+  roomy
+    .save()
+    .complete(function(err, roomy) {
+      if(!!err){
+        if(err.name === 'SequelizeUniqueConstraintError') {
+          return res.send(409, {
+            error: true, 
+            message: 'This email is already taken'
+          });
+        }
+
+        return next(err);
+      }
+
       res.send(200, {error: false, message: roomy});
       return next(roomy);
     });
+};
+
+exports.updateOne = function(req, res, next){
+  req.models.Roomy
+    .find(req.params.uuid)
+    .complete(function(err, roomy){
+      if(!!err) {
+        return next(err);
+      }
+
+      if(!roomy) {
+        res.send(404);
+        return next();
+      }
+
+      roomy.updateAttributes(req.params).then(function(roomy){
+        res.send(200, {error: false, message: roomy});
+        return next(roomy);
+      });
   });
 };

@@ -1,28 +1,46 @@
 var Sequelize = require('sequelize');
+var bcrypt = require('bcrypt');
 
 module.exports = function (sequelize) {
   return sequelize.define('Roomy', {
-    id: {
-      type: Sequelize.INTEGER,
-      primaryKey : true,
-      autoIncrement: true
+    uuid: {
+      type: Sequelize.UUID,
+      unique: true,
+      defaultValue: Sequelize.UUIDV4
     },
-    first_name: Sequelize.STRING,
-    last_name: Sequelize.STRING,
+    firstName: Sequelize.STRING,
+    lastName: Sequelize.STRING,
     email: {
       type: Sequelize.STRING,
       unique: true,
+      allowNull: false,
       validate: {
         isEmail: true
+      },
+      set: function(email) {
+        this.setDataValue('email', email.toLowerCase());
       }
     },
     token: {
       type: Sequelize.STRING,
-      unique: true,
-      set: function(newValue){
-        this.setDataValue('token', newValue);
-      }
+      unique: true
     },
-    password: Sequelize.STRING
+    password: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      set: function(password) {
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(password, salt);
+
+        this.setDataValue('password', hash);
+      }
+    }
+  }, {
+    classMethods: {},
+    instanceMethods: {
+      checkPassword: function(password) {
+        // TODO
+      }
+    }
   });
 };

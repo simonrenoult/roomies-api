@@ -1,3 +1,6 @@
+# InteliJ IDEA stuff
+.idea
+
 # Logs
 logs
 *.log

@@ -10,3 +10,8 @@ exports.getConf = function(req, res, next){
   res.send(conf);
   return next();
 };
+
+exports.methodNotAllowed = function(req, res, next) {
+  res.send(405, {error: true, message: 'Method not allowed.'});
+  return next();
+};
