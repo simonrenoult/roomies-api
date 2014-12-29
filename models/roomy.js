@@ -28,7 +28,10 @@ module.exports = function (sequelize) {
     },
     token: {
       type: Sequelize.STRING,
-      unique: true
+      unique: true,
+      defaultValue: function() {
+        return require('crypto').randomBytes(32).toString('hex');
+      }
     },
     password: {
       type: Sequelize.STRING,
