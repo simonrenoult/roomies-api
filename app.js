@@ -39,6 +39,26 @@ var roomyHandler = require('./handlers/roomy');
 
 // ---------------- ROUTES ---------------- //
 
+app.get('/', function(req, res, next){
+  res.send(301, 'http://locahost:5000/api');
+  return next();
+});
+
+app.get('/api', function(req, res, next){
+  res.json([
+    'GET /',
+    'GET /api',
+    'GET /api/docs',
+    'GET /api/roomies',
+    'POST /api/roomies',
+    'DELETE /api/roomies',
+    'GET /api/roomies/:uuid',
+    'PUT /api/roomies/:uuid',
+    'DELETE /api/roomies/:uuid'
+  ]);
+  return next();
+});
+
 app.get('/api/docs', miscHandler.getDocumentation);
 app.get('/api/conf', miscHandler.getConf);
 
