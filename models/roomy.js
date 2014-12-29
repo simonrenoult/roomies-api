@@ -12,7 +12,7 @@ module.exports = function (sequelize) {
       type: Sequelize.STRING,
       unique: true,
       validate: {
-        is: /^[a-zA-Z0-9_.]+$/i
+        is: /^[a-z0-9_.]+$/i
       }
     },
     email: {
