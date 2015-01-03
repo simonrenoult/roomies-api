@@ -23,6 +23,26 @@ app.use(function(req, res, next) {
   return next();
 });
 
+app.use(function(req, res, next){
+  if(req.method === 'GET' && req.url === '/api/auth') {
+    return next();
+  }
+
+  if(req.method === 'POST' && req.url === '/api/roomies') {
+    return next();
+  }
+
+  req.models.Roomy
+    .findAll({where:{token: req.headers.authorization}})
+    .on('success', function(roomy) {
+      if(!roomy.length){
+        return res.send(401, {error: true, message: 'Unknown token'});
+      }
+
+      return next();
+    });
+});
+
 // ---------------- MONITORING ------------ //
 
 var opbeat = require('opbeat')({
@@ -43,6 +63,8 @@ app.get('/', miscHandler.redirectToRootAPI(app));
 app.get('/api', miscHandler.apiMethodsList);
 app.get('/api/docs', miscHandler.getDocumentation);
 app.get('/api/conf', miscHandler.getConf);
+
+app.get('/api/auth', miscHandler.authenticate);
 
 app.get ('/api/roomies', roomyHandler.findAll);
 app.post('/api/roomies', roomyHandler.createOne);

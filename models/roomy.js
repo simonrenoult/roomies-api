@@ -8,7 +8,7 @@ module.exports = function (sequelize) {
       unique: true,
       defaultValue: Sequelize.UUIDV4
     },
-    pseudo: {
+    username: {
       type: Sequelize.STRING,
       unique: true,
       validate: {
@@ -47,7 +47,7 @@ module.exports = function (sequelize) {
     classMethods: {},
     instanceMethods: {
       checkPassword: function(password) {
-        // TODO
+        return bcrypt.compareSync(password, this.password);
       }
     }
   });

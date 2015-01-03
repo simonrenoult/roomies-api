@@ -38,3 +38,34 @@ exports.apiMethodsList = function(req, res, next) {
   ]);
   return next();
 };
+
+exports.authenticate = function(req, res, next) {
+  var credentials;
+  try {
+    credentials = req.headers.authorization.split(':');
+  } catch (e) {
+    return res.send(400, {error: true, message: 'Error parsing credentials'});
+  }
+
+  var username = credentials[0];  
+  var password = credentials[1];
+
+  if(!username || !password) {
+    return res.send(400, {error: true, message: 'Error parsing credentials'});
+  }
+
+  req.models.Roomy
+    .find({where: {username: username}})
+    .on('success', function(roomy) {
+      if(!roomy) {
+        return res.send(404, {error: true, message: 'Roomy not found'});
+      }
+
+      if(!roomy.checkPassword(password)) {
+        return res.send(400, {error: true, message: 'Wrong credentials'});
+      }
+
+      // Success
+      return res.send(200, {error: false, message: roomy.token});
+    });
+};

@@ -91,15 +91,15 @@ exports.deleteOne = function(req, res, next){
 exports.createOne = function(req, res, next) {
   var email    = req.body.email;
   var password = req.body.password;
-  var pseudo   = req.body.pseudo;
+  var username = req.body.username;
 
   if(!email) {
     res.send(400, {error: true, message: 'Email is missing'});
     return next();
   }
 
-  if(!pseudo) {
-    res.send(400, {error: true, message: 'Pseudo is missing'});
+  if(!username) {
+    res.send(400, {error: true, message: 'Username is missing'});
     return next();
   }
 
@@ -111,7 +111,7 @@ exports.createOne = function(req, res, next) {
   var roomy = req.models.Roomy.build({
     email: email,
     password: password,
-    pseudo: pseudo
+    username: username
   });
 
   roomy
