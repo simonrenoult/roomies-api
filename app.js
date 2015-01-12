@@ -56,6 +56,7 @@ var opbeat = require('opbeat')({
 
 var miscHandler = require('./handlers/misc');
 var roomyHandler = require('./handlers/roomy');
+var collocationHandler = require('./handlers/collocation');
 
 // ---------------- ROUTES ---------------- //
 
@@ -75,6 +76,17 @@ app.get ('/api/roomies/:uuid', roomyHandler.findOne);
 app.put ('/api/roomies/:uuid', roomyHandler.updateOne);
 app.del ('/api/roomies/:uuid', roomyHandler.deleteOne);
 app.post('/api/roomies/:uuid', miscHandler.methodNotAllowed);
+
+app.get ('/api/collocations/:uuid', collocationHandler.findOne);
+app.post('/api/collocations/:uuid', miscHandler.methodNotAllowed);
+// TODO: Implement PUT handler
+// app.put('/api/collocations/:uuid', collocation.updateOne);
+app.del ('/api/collocations/:uuid', collocationHandler.deleteOne);
+
+app.get ('/api/collocations', collocationHandler.findAll);
+app.post('/api/collocations', collocationHandler.createOne);
+app.put ('/api/collocations', miscHandler.methodNotAllowed);
+app.del ('/api/collocations', collocationHandler.deleteAll);
 
 // ---------------- MISC ---------------- //
 

@@ -2,10 +2,10 @@ var Sequelize = require('sequelize');
 
 module.exports = function (sequelize) {
   return sequelize.define('Collocation', {
-    id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+    uuid: {
+      type: Sequelize.UUID,
+      unique: true,
+      defaultValue: Sequelize.UUIDV4
     },
     name: {
       type: Sequelize.STRING,

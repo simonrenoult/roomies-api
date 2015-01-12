@@ -24,17 +24,22 @@ if (process.env.DATABASE_URL) {
     });
 }
 
-var db = {
-  Roomy       : sequelize.import(__dirname + '/roomy'),
-  Collocation : sequelize.import(__dirname + '/collocation'),
-  Message     : sequelize.import(__dirname + '/message')
-};
-
-sequelize.sync({force: true});
+var Roomy = sequelize.import(__dirname + '/roomy');
+var Collocation = sequelize.import(__dirname + '/collocation');
+var Message = sequelize.import(__dirname + '/message');
 
 /*
   Associations can be defined here. E.g. like this:
   global.db.User.hasMany(global.db.SomethingElse)
 */
 
-module.exports = db;
+Collocation.hasMany(Roomy, {as: 'occupants'});
+Collocation.hasMany(Message, {as: 'board'});
+
+sequelize.sync();
+
+module.exports = {
+  Roomy: Roomy,
+  Collocation: Collocation,
+  Message: Message
+};
