@@ -50,8 +50,12 @@ exports.authenticate = function(req, res, next) {
   var username = credentials[0];  
   var password = credentials[1];
 
-  if(!username || !password) {
-    return res.send(400, {error: true, message: 'Error parsing credentials'});
+  if(!username) {
+    return res.send(400, {error: true, message: 'Error parsing credentials : username missing'});
+  }
+
+  if(!password) {
+    return res.send(400, {error: true, message: 'Error parsing credentials : password missing'});
   }
 
   req.models.Roomy
