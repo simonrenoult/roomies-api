@@ -70,6 +70,6 @@ exports.authenticate = function(req, res, next) {
       }
 
       // Success
-      return res.send(200, {error: false, message: roomy.token});
+      return res.send(200, {error: false, message: roomy});
     });
 };

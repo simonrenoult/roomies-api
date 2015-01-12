@@ -33,10 +33,9 @@ var Message = sequelize.import(__dirname + '/message');
   global.db.User.hasMany(global.db.SomethingElse)
 */
 
-Collocation.hasMany(Roomy, {as: 'occupants'});
-Collocation.hasMany(Message, {as: 'board'});
+Roomy.belongsTo(Collocation, {as: 'home'});
 
-sequelize.sync();
+sequelize.sync({force: true});
 
 module.exports = {
   Roomy: Roomy,

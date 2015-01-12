@@ -16,7 +16,7 @@ exports.findAll = function(req, res, next){
 
 exports.findOne = function(req, res, next){
   req.models.Roomy
-    .find(req.params.uuid)
+    .find({where: {uuid: req.params.uuid}})
     .complete(function(err, roomy){
       if(!!err) {
         return next(err);
