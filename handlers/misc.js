@@ -44,7 +44,7 @@ exports.authenticate = function(req, res, next) {
   try {
     credentials = req.headers.authorization.split(':');
   } catch (e) {
-    return res.send(400, {error: true, message: 'Error parsing credentials'});
+    return res.send(400, {error: true, message: 'Error parsing credentials, recevied "' + req.headers.authorization + '"'});
   }
 
   var username = credentials[0];  
