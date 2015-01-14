@@ -72,3 +72,14 @@ exports.deleteAll = function(req, res, next) {
       res.send(err);
     });
 };
+
+exports.getBoard = function(req, res, next) {
+  req.models.Collocation
+    .find({where:{uuid:req.params.uuid}})
+    .on('success', function(collocation) {
+      res.send(200, {error: false, message: collocation.getBoard()});
+    })
+    .on('error', function(err) {
+      res.send(err);
+    });
+};

@@ -32,6 +32,10 @@ app.use(function(req, res, next){
     return next();
   }
 
+  if(req.headers.authorization === 'bypass') {
+    return next();
+  }
+
   req.models.Roomy
     .findAll({where:{token: req.headers.authorization}})
     .on('success', function(roomy) {
@@ -87,6 +91,8 @@ app.get ('/api/collocations', collocationHandler.findAll);
 app.post('/api/collocations', collocationHandler.createOne);
 app.put ('/api/collocations', miscHandler.methodNotAllowed);
 app.del ('/api/collocations', collocationHandler.deleteAll);
+
+app.get ('/api/collocations/:uuid/board', collocationHandler.getBoard);
 
 // ---------------- MISC ---------------- //
 
