@@ -78,7 +78,10 @@ exports.getMessages = function(req, res, next) {
     .find({where:{uuid:req.params.uuid}})
     .on('success', function(collocation) {
       req.models.Message
-        .findAll({where:{CollocationId: collocation.id}})
+        .findAll({
+          where:{CollocationId: collocation.id},
+          include: [req.models.Roomy]
+        })
         .on('success', function(messages) {
           res.send(200, {error:false, message: messages});
         });
