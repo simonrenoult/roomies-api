@@ -50,6 +50,10 @@ module.exports = function (sequelize) {
     lng: {
       type: Sequelize.FLOAT,
       allowNull: true
+    },
+    balance: {
+      type: Sequelize.FLOAT,
+      allowNull: true
     }
   }, {
     classMethods: {},

@@ -113,7 +113,8 @@ exports.createOne = function(req, res, next) {
     password: password,
     username: username,
     lat: req.body.lat,
-    lng: req.body.lng
+    lng: req.body.lng,
+    balance: req.body.balance
   });
 
   roomy
