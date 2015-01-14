@@ -151,7 +151,11 @@ exports.updateOne = function(req, res, next){
         return next();
       }
 
-      roomy.updateAttributes(req.params).then(function(roomy){
+      if(!req.params.collocationId) {
+        return next();
+      }
+
+      roomy.updateAttributes({CollocationId: req.params.collocationId}).then(function(roomy){
         res.send(200, {error: false, message: roomy});
         return next(roomy);
       });
