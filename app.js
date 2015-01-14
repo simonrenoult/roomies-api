@@ -61,6 +61,7 @@ var opbeat = require('opbeat')({
 var miscHandler = require('./handlers/misc');
 var roomyHandler = require('./handlers/roomy');
 var collocationHandler = require('./handlers/collocation');
+var messagesHandler = require('./handlers/message');
 
 // ---------------- ROUTES ---------------- //
 
@@ -91,6 +92,16 @@ app.get ('/api/collocations', collocationHandler.findAll);
 app.post('/api/collocations', collocationHandler.createOne);
 app.put ('/api/collocations', miscHandler.methodNotAllowed);
 app.del ('/api/collocations', collocationHandler.deleteAll);
+
+app.get ('/api/messages', messagesHandler.findAll);
+app.post('/api/messages', messagesHandler.createOne);
+app.put ('/api/messages', miscHandler.methodNotAllowed);
+app.del ('/api/messages', messagesHandler.deleteAll);
+
+app.get ('/api/messages/:uuid', messagesHandler.findOne);
+app.put ('/api/messages/:uuid', messagesHandler.updateOne);
+app.del ('/api/messages/:uuid', messagesHandler.deleteOne);
+app.post('/api/messages/:uuid', miscHandler.methodNotAllowed);
 
 app.get ('/api/collocations/:uuid/board', collocationHandler.getBoard);
 

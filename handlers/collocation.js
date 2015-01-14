@@ -13,7 +13,7 @@ exports.findAll = function(req, res, next) {
 
 exports.findOne = function(req, res, next) {
   req.models.Collocation
-    .find(req.params.uuid)
+    .find({where: {uuid:req.params.uuid}})
     .on('success', function(collocation) {
       res.send(200, {error: false, message: collocation});
     })
@@ -43,7 +43,7 @@ exports.createOne = function(req, res, next) {
 
 exports.deleteOne = function(req, res, next) {
   req.models.Collocation
-    .find(req.body.uuid)
+    .find({where: {uuid:req.params.uuid}})
     .on('success', function(collocation) {
       collocation
         .destroy()
