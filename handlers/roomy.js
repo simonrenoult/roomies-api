@@ -111,7 +111,9 @@ exports.createOne = function(req, res, next) {
   var roomy = req.models.Roomy.build({
     email: email,
     password: password,
-    username: username
+    username: username,
+    lat: req.body.lat,
+    lng: req.body.lng
   });
 
   roomy

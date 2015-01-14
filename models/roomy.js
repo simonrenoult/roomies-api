@@ -42,6 +42,14 @@ module.exports = function (sequelize) {
 
         this.setDataValue('password', hash);
       }
+    },
+    lat: {
+      type: Sequelize.FLOAT,
+      allowNull: true
+    },
+    lng: {
+      type: Sequelize.FLOAT,
+      allowNull: true
     }
   }, {
     classMethods: {},
