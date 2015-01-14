@@ -36,7 +36,7 @@ exports.createOne = function(req, res, next) {
   message
     .save()
     .on('success', function(message){
-      req.models.Message.findAll()
+      req.models.Message.findAll({include:[req.models.Roomy]})
       .then(function(messages) {
         res.send(201, {error: false, message: messages});
       });
