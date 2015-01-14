@@ -61,7 +61,7 @@ exports.deleteAll = function(req, res, next){
 
 exports.deleteOne = function(req, res, next){
   req.models.Roomy
-    .find(req.params.uuid)
+    .find({where:{uuid:req.params.uuid}})
     .complete(function(err, roomy){
       if(!!err) {
         return next(err);
@@ -139,7 +139,7 @@ exports.createOne = function(req, res, next) {
 
 exports.updateOne = function(req, res, next){
   req.models.Roomy
-    .find(req.params.uuid)
+    .find({where: {uuid: req.params.uuid}})
     .complete(function(err, roomy){
       if(!!err) {
         return next(err);
