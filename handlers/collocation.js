@@ -78,8 +78,8 @@ exports.getMessages = function(req, res, next) {
     .find({where:{uuid:req.params.uuid}})
     .on('success', function(collocation) {
       req.models.Message
-        .find({where:{CollocationId: collocation.id}})
-        .then(function(messages) {
+        .findAll({where:{CollocationId: collocation.id}})
+        .on('success', function(messages) {
           res.send(200, {error:false, message: messages});
         });
     })

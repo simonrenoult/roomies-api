@@ -34,13 +34,13 @@ var Message = sequelize.import(__dirname + '/message');
 */
 
 Collocation.hasMany(Message);
+Message.belongsTo(Collocation);
+
+Collocation.hasMany(Roomy);
 Roomy.belongsTo(Collocation);
 
 Roomy.hasMany(Message);
 Message.belongsTo(Roomy);
-
-Collocation.hasMany(Roomy);
-Message.belongsTo(Collocation);
 
 
 sequelize.sync({force: true});
