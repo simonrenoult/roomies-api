@@ -97,7 +97,7 @@ app.post('/api/collocations/:uuid', miscHandler.methodNotAllowed);
 // app.put('/api/collocations/:uuid', collocation.updateOne);
 app.del ('/api/collocations/:uuid', collocationHandler.deleteOne);
 
-app.get ('/api/collocations/:uuid/board', collocationHandler.getBoard);
+app.get ('/api/collocations/:uuid/messages', collocationHandler.getMessages);
 
 // ---- MESSAGES ---- //
 

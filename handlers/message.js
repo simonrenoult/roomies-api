@@ -24,13 +24,13 @@ exports.findOne = function(req, res, next) {
 
 exports.createOne = function(req, res, next) {
   var content = req.body.content;
-  var authorId = req.body.authorId;
+  var roomyId = req.body.roomyId;
   var collocationId = req.body.collocationId;
 
   var message = req.models.Message.build({
     content: content,
     CollocationId: collocationId,
-    authorId: authorId
+    RoomyId: roomyId
   });
 
   message

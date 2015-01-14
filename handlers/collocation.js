@@ -73,11 +73,15 @@ exports.deleteAll = function(req, res, next) {
     });
 };
 
-exports.getBoard = function(req, res, next) {
+exports.getMessages = function(req, res, next) {
   req.models.Collocation
     .find({where:{uuid:req.params.uuid}})
     .on('success', function(collocation) {
-      res.send(200, {error: false, message: collocation.getBoard()});
+      req.models.Message
+        .find({where:{CollocationId: collocation.id}})
+        .then(function(messages) {
+          res.send(200, {error:false, message: messages});
+        });
     })
     .on('error', function(err) {
       res.send(err);
