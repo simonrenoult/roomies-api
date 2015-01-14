@@ -114,7 +114,8 @@ exports.createOne = function(req, res, next) {
     username: username,
     lat: req.body.lat,
     lng: req.body.lng,
-    balance: req.body.balance
+    balance: req.body.balance,
+    CollocationId: req.body.collocationId
   });
 
   roomy

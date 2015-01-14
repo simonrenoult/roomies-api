@@ -2,7 +2,7 @@ var Sequelize = require('sequelize');
 
 exports.findAll = function(req, res, next) {
   req.models.Collocation
-    .findAll()
+    .findAll({include: [req.models.Roomy]})
     .on('success', function(collocations) {
       res.send(200, {error: false, message: collocations});
     })
