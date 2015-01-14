@@ -36,7 +36,10 @@ exports.createOne = function(req, res, next) {
   message
     .save()
     .on('success', function(message){
-      res.send(201, {error: false, message: message});
+      req.models.Message.findAll()
+      .then(function(messages) {
+        res.send(201, {error: false, message: messages});
+      });
     })
     .on('error', function(err) {
       res.send(err);
