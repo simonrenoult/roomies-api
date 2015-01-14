@@ -13,7 +13,10 @@ exports.findAll = function(req, res, next) {
 
 exports.findOne = function(req, res, next) {
   req.models.Collocation
-    .find({where: {uuid:req.params.uuid}})
+    .find({
+      where: {uuid:req.params.uuid},
+      include:[req.models.Roomy]
+    })
     .on('success', function(collocation) {
       res.send(200, {error: false, message: collocation});
     })
