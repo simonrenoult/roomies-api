@@ -61,7 +61,7 @@ var opbeat = require('opbeat')({
 var miscHandler = require('./handlers/misc');
 var roomyHandler = require('./handlers/roomy');
 var collocationHandler = require('./handlers/collocation');
-var messagesHandler = require('./handlers/message');
+var messageHandler = require('./handlers/message');
 
 // ---------------- ROUTES ---------------- //
 
@@ -71,6 +71,8 @@ app.get('/api/docs', miscHandler.getDocumentation);
 app.get('/api/conf', miscHandler.getConf);
 
 app.get('/api/auth', miscHandler.authenticate);
+
+// ---- ROOMIES ---- //
 
 app.get ('/api/roomies', roomyHandler.findAll);
 app.post('/api/roomies', roomyHandler.createOne);
@@ -82,28 +84,33 @@ app.put ('/api/roomies/:uuid', roomyHandler.updateOne);
 app.del ('/api/roomies/:uuid', roomyHandler.deleteOne);
 app.post('/api/roomies/:uuid', miscHandler.methodNotAllowed);
 
-app.get ('/api/collocations/:uuid', collocationHandler.findOne);
-app.post('/api/collocations/:uuid', miscHandler.methodNotAllowed);
-// TODO: Implement PUT handler
-// app.put('/api/collocations/:uuid', collocation.updateOne);
-app.del ('/api/collocations/:uuid', collocationHandler.deleteOne);
+// ---- COLLOCATIONS ---- //
 
 app.get ('/api/collocations', collocationHandler.findAll);
 app.post('/api/collocations', collocationHandler.createOne);
 app.put ('/api/collocations', miscHandler.methodNotAllowed);
 app.del ('/api/collocations', collocationHandler.deleteAll);
 
-app.get ('/api/messages', messagesHandler.findAll);
-app.post('/api/messages', messagesHandler.createOne);
-app.put ('/api/messages', miscHandler.methodNotAllowed);
-app.del ('/api/messages', messagesHandler.deleteAll);
-
-app.get ('/api/messages/:uuid', messagesHandler.findOne);
-app.put ('/api/messages/:uuid', messagesHandler.updateOne);
-app.del ('/api/messages/:uuid', messagesHandler.deleteOne);
-app.post('/api/messages/:uuid', miscHandler.methodNotAllowed);
+app.get ('/api/collocations/:uuid', collocationHandler.findOne);
+app.post('/api/collocations/:uuid', miscHandler.methodNotAllowed);
+// TODO: Implement PUT handler
+// app.put('/api/collocations/:uuid', collocation.updateOne);
+app.del ('/api/collocations/:uuid', collocationHandler.deleteOne);
 
 app.get ('/api/collocations/:uuid/board', collocationHandler.getBoard);
+
+// ---- MESSAGES ---- //
+
+app.get ('/api/messages', messageHandler.findAll);
+app.post('/api/messages', messageHandler.createOne);
+app.put ('/api/messages', miscHandler.methodNotAllowed);
+app.del ('/api/messages', messageHandler.deleteAll);
+
+app.get ('/api/messages/:uuid', messageHandler.findOne);
+// app.put ('/api/messages/:uuid', messageHandler.updateOne);
+app.del ('/api/messages/:uuid', messageHandler.deleteOne);
+app.post('/api/messages/:uuid', miscHandler.methodNotAllowed);
+
 
 // ---------------- MISC ---------------- //
 
