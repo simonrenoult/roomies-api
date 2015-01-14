@@ -59,7 +59,10 @@ exports.authenticate = function(req, res, next) {
   }
 
   req.models.Roomy
-    .find({where: {username: username}})
+    .find({
+      where: {username: username},
+      include: [req.models.Collocation]
+    })
     .on('success', function(roomy) {
       if(!roomy) {
         return res.send(404, {error: true, message: 'Roomy not found'});
