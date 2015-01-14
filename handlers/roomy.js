@@ -143,7 +143,10 @@ exports.createOne = function(req, res, next) {
 
 exports.updateOne = function(req, res, next){
   req.models.Roomy
-    .find({where: {uuid: req.params.uuid}})
+    .find({
+      where: {uuid: req.params.uuid},
+      include: [req.models.Collocation]
+    })
     .complete(function(err, roomy){
       if(!!err) {
         return next(err);
